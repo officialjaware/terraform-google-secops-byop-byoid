@@ -50,7 +50,7 @@ variable "pingone_region" {
   type = string
 
   validation {
-    condition     = contains(["AsiaPacific", "Canada", "Europe", "NorthAmerica"], var.idp)
+    condition     = contains(["AsiaPacific", "Canada", "Europe", "NorthAmerica"], var.pingone_region)
     error_message = "ERROR: Valid values for var.pingone_region are \"AsiaPacific\", \"Canada\", \"Europe\", \"NorthAmerica\""
   }
 }
