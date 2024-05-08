@@ -4,7 +4,7 @@ This project sets up the necessary resources in GCP and a 3rd party IdP during C
 
 ### Resources created:
 
-`gcp.tf`
+`gcp.tf` (in your own project configured for SecOps)
 
 - enable SecOps API
 - Create IAM Workforce Pool
@@ -44,7 +44,7 @@ PingOne does not support programmatically retrieving the metadata for an applica
 
 ## Requirements
 
-- Active Chronicle subscription
+- Active SecOps subscription
 
 - GCP project configured for Google SecOps:
     - [GCP Console Instructions](https://cloud.google.com/chronicle/docs/onboard/configure-cloud-project)
@@ -82,9 +82,9 @@ PingOne does not support programmatically retrieving the metadata for an applica
 
 Variable | Description | Example
 -- | -- | --
-google_organization | This is the org name of your Okta account.  | dev-123456.oktapreview.com would have an org name of `dev-12345`.
-gcp_project_id | This is the domain of your Okta account. | dev-123456.oktapreview.com would have a base url of `oktapreview.com`.
-okta_token | This is the API token to interact with your Okta org. | 00I_2kmj1kk345jj2m2k32
+google_organization | This is the org name of GCP Organization.  | acmecorp.com
+gcp_project_id | ID of the project configured for SecOps. | acmecorp-chronicle 
+secops_tenant_url | URL of your SecOps tenant | https://acmecorp.backstory.chronicle.security
 
 
 </details>
