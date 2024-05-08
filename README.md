@@ -128,6 +128,10 @@ pingone_region | The PingOne region to use. Options are `AsiaPacific` `Canada` `
 
 ## Usage
 
+1. Clone this repo.
+
+1. Input the appropriate variable values.
+
 1. Run the following Terraform commands:
 
     ```terraform
