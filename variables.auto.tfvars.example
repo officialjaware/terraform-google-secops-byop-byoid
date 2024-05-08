@@ -1,0 +1,20 @@
+
+google_organization    = ""
+gcp_project_id         = ""
+chronicle_tenant_url   = "https://tenant.backstory.chronicle.security"
+idp                    = ""
+idp_app_label          = "Chronicle SecOps"
+idp_groups = {
+  admin  = "chronicle_secops_admins"
+  editor = "chronicle_secops_editor"
+  viewer = "chronicle_secops_viewer"
+}
+
+## Input values depending on idp selected in var.idp
+okta_org_name          = ""
+okta_base_url          = ""
+okta_token             = ""
+pingone_client_id      = ""
+pingone_client_secret  = ""
+pingone_environment_id = ""
+pingone_region         = ""
