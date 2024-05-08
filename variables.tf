@@ -7,7 +7,7 @@ variable "gcp_project_id" {
   type = string
 }
 
-variable "chronicle_tenant_url" {
+variable "secops_tenant_url" {
   type = string
 }
 

@@ -9,5 +9,5 @@ output "workforce_provider" {
 }
 
 output "frontend_path" {
-  value = regex("([^https://].*[^.backstory.chronicle.security])", var.chronicle_tenant_url)
+  value = regex("([^https://].*[^.backstory.chronicle.security])", var.secops_tenant_url)
 }

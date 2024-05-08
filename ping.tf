@@ -40,7 +40,7 @@ resource "pingone_application" "chronicle" {
     assertion_duration = 300
     nameid_format      = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
     sp_entity_id       = local.audience_url
-    default_target_url = var.chronicle_tenant_url
+    default_target_url = var.secops_tenant_url
     response_is_signed = true
   }
 

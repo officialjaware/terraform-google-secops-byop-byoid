@@ -14,7 +14,7 @@ resource "okta_app_saml" "chronicle" {
   label               = var.idp_app_label
   logo                = "${path.module}/secops_logo.png"
   sso_url             = local.acs_url
-  default_relay_state = var.chronicle_tenant_url
+  default_relay_state = var.secops_tenant_url
   audience            = local.audience_url
   recipient           = local.acs_url
   destination         = local.acs_url
@@ -32,7 +32,7 @@ resource "okta_app_saml" "chronicle" {
     name         = "groups"
     type         = "GROUP"
     filter_type  = "CONTAINS"
-    filter_value = "chronicle_secops"
+    filter_value = "google_secops"
   }
 
   dynamic "attribute_statements" {
