@@ -8,7 +8,7 @@ locals {
   }
 }
 
-resource "okta_app_saml" "chronicle" {
+resource "okta_app_saml" "secops" {
   count = var.idp == "okta" ? 1 : 0
 
   label               = var.idp_app_label
@@ -45,7 +45,7 @@ resource "okta_app_saml" "chronicle" {
 
 }
 
-resource "okta_group" "chronicle" {
+resource "okta_group" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
     if var.idp == "okta"
@@ -55,12 +55,12 @@ resource "okta_group" "chronicle" {
   description = "Grants access to ${var.idp_app_label} using the prebuilt default ${title(each.key)} role"
 }
 
-resource "okta_app_group_assignment" "chronicle" {
+resource "okta_app_group_assignment" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
     if var.idp == "okta"
   }
 
-  app_id   = okta_app_saml.chronicle[0].id
-  group_id = okta_group.chronicle[each.key].id
+  app_id   = okta_app_saml.secops[0].id
+  group_id = okta_group.secops[each.key].id
 }

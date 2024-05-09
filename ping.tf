@@ -28,7 +28,7 @@ locals {
   ]
 }
 
-resource "pingone_application" "chronicle" {
+resource "pingone_application" "secops" {
   count = var.idp == "pingone" ? 1 : 0
 
   environment_id = var.pingone_environment_id
@@ -46,24 +46,24 @@ resource "pingone_application" "chronicle" {
 
   access_control_group_options {
     groups = [
-      for key, group_name in var.idp_groups : pingone_group.chronicle[key].id
+      for key, group_name in var.idp_groups : pingone_group.secops[key].id
     ]
     type = "ANY_GROUP"
   }
 }
 
 
-resource "pingone_application_attribute_mapping" "mappings" {
+resource "pingone_application_attribute_mapping" "secops" {
   count          = var.idp == "pingone" ? length(local.attribute_mappings) : 0
   environment_id = var.pingone_environment_id
-  application_id = pingone_application.chronicle[0].id
+  application_id = pingone_application.secops[0].id
 
   name     = local.attribute_mappings[count.index].name
   value    = local.attribute_mappings[count.index].value
   required = local.attribute_mappings[count.index].name == "saml_subject" ? true : null
 }
 
-resource "pingone_group" "chronicle" {
+resource "pingone_group" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
     if var.idp == "pingone"

@@ -7,7 +7,7 @@ data "local_file" "metadata" {
   filename = "${path.module}/metadata.xml"
 }
 
-resource "google_project_service" "chronicle" {
+resource "google_project_service" "secops" {
   service = "chronicle.googleapis.com"
 
   timeouts {
@@ -18,7 +18,7 @@ resource "google_project_service" "chronicle" {
   disable_dependent_services = true
 }
 
-resource "google_iam_workforce_pool" "chronicle" {
+resource "google_iam_workforce_pool" "secops" {
   workforce_pool_id = local.new_pool_id
   parent            = "organizations/${data.google_organization.org.org_id}"
   location          = "global"
@@ -33,9 +33,9 @@ resource "google_iam_workforce_pool" "chronicle" {
   }
 }
 
-resource "google_iam_workforce_pool_provider" "chronicle" {
-  workforce_pool_id = google_iam_workforce_pool.chronicle.workforce_pool_id
-  location          = google_iam_workforce_pool.chronicle.location
+resource "google_iam_workforce_pool_provider" "secops" {
+  workforce_pool_id = google_iam_workforce_pool.secops.workforce_pool_id
+  location          = google_iam_workforce_pool.secops.location
   provider_id       = local.new_pool_provider_id
   display_name      = local.new_pool_provider_id
   description       = "Workforce Provider for ${var.idp_app_label}"
@@ -51,7 +51,7 @@ resource "google_iam_workforce_pool_provider" "chronicle" {
   }
 
   saml {
-    idp_metadata_xml = var.idp == "okta" ? okta_app_saml.chronicle[0].metadata : var.idp == "azure" ? 1 : var.idp == "ping" ? data.local_file.metadata[0].content : 0
+    idp_metadata_xml = var.idp == "okta" ? okta_app_saml.secops[0].metadata : var.idp == "azure" ? 1 : var.idp == "ping" ? data.local_file.metadata[0].content : 0
   }
 }
 

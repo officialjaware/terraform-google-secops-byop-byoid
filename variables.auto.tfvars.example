@@ -1,13 +1,13 @@
 
 google_organization    = ""
 gcp_project_id         = ""
-chronicle_tenant_url   = "https://tenant.backstory.chronicle.security"
+secops_tenant_url   = "https://tenant.backstory.chronicle.security"
 idp                    = ""
-idp_app_label          = "Chronicle SecOps"
+idp_app_label          = "Google SecOps"
 idp_groups = {
-  admin  = "chronicle_secops_admins"
-  editor = "chronicle_secops_editor"
-  viewer = "chronicle_secops_viewer"
+  admin  = "google_secops_admins"
+  editor = "google_secops_editor"
+  viewer = "google_secops_viewer"
 }
 
 ## Input values depending on idp selected in var.idp
