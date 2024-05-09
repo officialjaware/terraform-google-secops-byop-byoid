@@ -1,6 +1,6 @@
 # Terraforming Google SecOps (BYOP + BYOID)
 
-This project sets up the necessary resources in GCP and a 3rd party IdP during Chronicle/SecOps onboarding for BYOP + BYOID. The intent is to make it easier for CEs, Partners, and customers to get SecOps auth up and running quickly using IaC (Terraform).
+This project sets up the necessary resources in GCP and a 3rd party IdP during Google SecOps (formerly Chronicle) onboarding for BYOP + BYOID. The intent is to make it easier for CEs, Partners, and customers to get SecOps auth up and running quickly using IaC (Terraform).
 
 ### Resources created:
 
@@ -24,23 +24,33 @@ Each idp.tf (`okta.tf`, `pingone.tf`) does the following:
 
 ## Important Notes
 
+
 ### Okta - IdP Groups
 
+<details>
+<summary>Click to expand</summary>
+<br> 
 If modifying the IdP groups from the default (var.idp_groups), you must also update the filter_value attribute statement in `okta.tf` to match your desired group prefixes:
 
 ```  attribute_statements {
     name         = "groups"
     type         = "GROUP"
     filter_type  = "CONTAINS"
-    filter_value = "chronicle_secops" <--update this
+    filter_value = "google_secops" <--update this
   }
 ```
 
 This is for Okta only.
+</details>
 
 ### PingOne - IdP Metadata
 
+<details>
+<summary>Click to expand</summary>
+<br> 
 PingOne does not support programmatically retrieving the metadata for an application via Terraform, so it must be [downloaded manually](https://docs.pingidentity.com/r/en-us/pingone/p1_t_downloadidpmetadataapps) after the first run and placed into this projects root directory as `metadata.xml`. Then, Terraform Apply needs to be run a second time.
+
+</details>
 
 ## Requirements
 
@@ -110,12 +120,10 @@ okta_token | This is the API token to interact with your Okta org. | 00I_2kmj1kk
 
 <details>
 <summary>Click to expand</summary>
-<br>1. Follow the [instructions](https://terraform.pingidentity.com/getting-started/pingone/) to create a worker application for Terraform and generate credentials.
 
+<br>1. Follow the [instructions](https://terraform.pingidentity.com/getting-started/pingone/) to create a worker application for Terraform and generate credentials.
 <br>
 2. Set the appropriate values for the respective PingOne variables: 
-<br>
-<br>
 
 Variable | Description | Example
 -- | -- | --
@@ -130,7 +138,7 @@ pingone_region | The PingOne region to use. Options are `AsiaPacific` `Canada` `
 
 1. Clone this repo.
 
-1. Input the appropriate variable values.
+1. Input the appropriate variable values in your own variables file (example is provided in `variables.auto.tfvars.example`)
 
 1. Run the following Terraform commands:
 
