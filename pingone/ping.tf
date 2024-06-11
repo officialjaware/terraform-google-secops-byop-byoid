@@ -29,7 +29,6 @@ locals {
 }
 
 resource "pingone_application" "secops" {
-  count = var.idp == "pingone" ? 1 : 0
 
   environment_id = var.pingone_environment_id
   name           = var.idp_app_label
@@ -54,9 +53,9 @@ resource "pingone_application" "secops" {
 
 
 resource "pingone_application_attribute_mapping" "secops" {
-  count          = var.idp == "pingone" ? length(local.attribute_mappings) : 0
+  count          = length(local.attribute_mappings)
   environment_id = var.pingone_environment_id
-  application_id = pingone_application.secops[0].id
+  application_id = pingone_application.secops.id
 
   name     = local.attribute_mappings[count.index].name
   value    = local.attribute_mappings[count.index].value
@@ -66,7 +65,6 @@ resource "pingone_application_attribute_mapping" "secops" {
 resource "pingone_group" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
-    if var.idp == "pingone"
   }
 
   environment_id = var.pingone_environment_id

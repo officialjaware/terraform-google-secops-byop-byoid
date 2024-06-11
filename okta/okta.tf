@@ -9,10 +9,9 @@ locals {
 }
 
 resource "okta_app_saml" "secops" {
-  count = var.idp == "okta" ? 1 : 0
 
   label               = var.idp_app_label
-  logo                = "${path.module}/secops_logo.png"
+  logo                = "${path.module}/../secops_logo.png"
   sso_url             = local.acs_url
   default_relay_state = var.secops_tenant_url
   audience            = local.audience_url
@@ -48,7 +47,6 @@ resource "okta_app_saml" "secops" {
 resource "okta_group" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
-    if var.idp == "okta"
   }
 
   name        = each.value
@@ -58,9 +56,8 @@ resource "okta_group" "secops" {
 resource "okta_app_group_assignment" "secops" {
   for_each = {
     for k, v in var.idp_groups : k => v
-    if var.idp == "okta"
   }
 
-  app_id   = okta_app_saml.secops[0].id
+  app_id   = okta_app_saml.secops.id
   group_id = okta_group.secops[each.key].id
 }

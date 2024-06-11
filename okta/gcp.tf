@@ -2,11 +2,6 @@ data "google_organization" "org" {
   domain = var.google_organization
 }
 
-data "local_file" "metadata" {
-  count    = var.idp == "ping" ? 1 : 0
-  filename = "${path.module}/metadata.xml"
-}
-
 resource "google_project_service" "secops" {
   service = "chronicle.googleapis.com"
 
@@ -51,7 +46,7 @@ resource "google_iam_workforce_pool_provider" "secops" {
   }
 
   saml {
-    idp_metadata_xml = var.idp == "okta" ? okta_app_saml.secops[0].metadata : var.idp == "azure" ? 1 : var.idp == "ping" ? data.local_file.metadata[0].content : 0
+    idp_metadata_xml = okta_app_saml.secops.metadata
   }
 }
 

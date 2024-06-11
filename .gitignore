@@ -6,3 +6,4 @@
 azure.tf 
 NOTES.md
 .terraform/
+old/
