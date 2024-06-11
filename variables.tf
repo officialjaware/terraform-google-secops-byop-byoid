@@ -22,32 +22,39 @@ variable "idp" {
 
 variable "okta_org_name" {
   type = string
+  default = ""
 }
 
 variable "okta_base_url" {
   type = string
+  default = ""
 }
 
 variable "okta_token" {
   type      = string
   sensitive = true
+  default = ""
 }
 
 variable "pingone_client_id" {
   type = string
+  default = "changeme1"
 }
 
 variable "pingone_client_secret" {
   type      = string
   sensitive = true
+  default = "changeme"
 }
 
 variable "pingone_environment_id" {
   type = string
+  default = "changeme"
 }
 
 variable "pingone_region" {
   type = string
+  default = "NorthAmerica"
 
   validation {
     condition     = contains(["AsiaPacific", "Canada", "Europe", "NorthAmerica"], var.pingone_region)
@@ -70,19 +77,23 @@ variable "idp_groups" {
 
 variable "azure_client_id" {
   type = string
+  default = ""
 }
 
 variable "azure_client_secret" {
   type      = string
   sensitive = true
+  default = ""
 }
 
 variable "azure_tenant_id" {
   type = string
+  default = ""
 }
 
 
 variable "azure_subscription_id" {
   type = string
+  default = ""
 }
 

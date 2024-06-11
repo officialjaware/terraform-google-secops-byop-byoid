@@ -51,7 +51,7 @@ resource "google_iam_workforce_pool_provider" "secops" {
   }
 
   saml {
-    idp_metadata_xml = var.idp == "okta" ? okta_app_saml.secops[0].metadata : var.idp == "azure" ? 1 : var.idp == "ping" ? data.local_file.metadata[0].content : 0
+    idp_metadata_xml = var.idp == "okta" ? module.okta.okta_app_saml[0].metadata : var.idp == "azure" ? 1 : var.idp == "ping" ? data.local_file.metadata[0].content : 0
   }
 }
 

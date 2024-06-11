@@ -26,6 +26,8 @@ locals {
       value = "$${user.memberOfGroupNames}"
     }
   ]
+  acs_url = var.acs_url
+  audience_url = var.audience_url
 }
 
 resource "pingone_application" "secops" {

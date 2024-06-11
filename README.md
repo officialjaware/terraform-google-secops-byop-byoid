@@ -1,5 +1,7 @@
 # Terraforming Google SecOps (BYOP + BYOID)
 
+**NOTE: This is currently broken as the PingOne provider validates the provider configuration is valid on init, even if P1 isn't the selected IdP. Waiting for official Terraform support for conditional modules or conditional provider blocks**
+
 This project sets up the necessary resources in GCP and a 3rd party IdP during Google SecOps (formerly Chronicle) onboarding for BYOP + BYOID. The intent is to make it easier for CEs, Partners, and customers to get SecOps auth up and running quickly using IaC (Terraform).
 
 ### Resources created:
@@ -23,7 +25,6 @@ Each idp.tf (`okta.tf`, `pingone.tf`) does the following:
 
 
 ## Important Notes
-
 
 ### Okta - IdP Groups
 
